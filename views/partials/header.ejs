@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <% if (typeof js_includes !== 'undefined') { %>
+        <% for(var i=0; i < js_includes.length; i++) { %>
+            <script src="<%= js_includes[i] %>"></script>
+        <% }%>
+    <% }%>
+    <style>
+        html, body {
+            font-family: "Palatino Linotype";
+            background: url("http://subtlepatterns2015.subtlepatterns.netdna-cdn.com/patterns/escheresque_ste.png") repeat;
+            height: 100%;
+            color: #eeeeee;
+        }
+        header {
+            background: rgba(0, 0, 0, .5);
+            margin: 0 auto;
+            color:white;
+            text-align:center;
+            padding:5px;
+        }
+        nav {
+            line-height:30px;
+            background: rgba(0, 0, 0, .25);
+            width:150px;
+            height:80%;
+            float:left;
+            padding:15px;
+        }
+        section {
+            width:600px;
+            float:left;
+            padding:20px;
+        }
+        table, th, td {
+            background: rgba(255, 255, 255, .125);
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+        }
+        td {
+            width: 150px;
+        }
+        footer {
+            background: rgba(0, 0, 0, .5);
+            color:white;
+            clear:both;
+            text-align:center;
+            padding:5px;
+        }
+        .container {
+            width: 70%;
+            margin: 10px auto;
+            position: absolute;
+        }
+        .center {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+        }
+        a:link    {color: #b7e2ff; background-color:transparent; text-decoration:none}
+        a:visited    {color: #7c98ae; background-color:transparent; text-decoration:none}
+        a:hover   {color: #ffefcc; background-color:transparent; text-decoration:none}
+    </style>
+</head>
+<body class="center">
+<header>
+    <div style="float:right;color:white;">
+        <% if(typeof firstname !== "undefined") { %>
+        Welcome, <%= firstname %>
+        <% } else { %>
+        <a href="/login">Login</a>
+        <% } %>
+        <% if(typeof firstname !== "undefined") { %><a href="/logout">Logout</a><% } %>
+    </div>
+    <h1><a href="/">Handgun Cartridge Database</a></h1>
+</header>
+<nav>
+    <a href="/about">About</a>
+</nav>

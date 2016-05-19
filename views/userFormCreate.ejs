@@ -1,0 +1,46 @@
+<% var js_includes = ['https://code.jquery.com/jquery-1.12.3.min.js', '/javascripts/signup_ajax.js']%>
+
+<% include partials/header %>
+<section>
+<form id="uform">
+    <table>
+        <tr>
+            <td>
+                <label for="firstname">First Name</label>
+            </td>
+            <td>
+                <input type="text" id="firstname" name="firstname" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="lastname">Last Name</label>
+            </td>
+            <td>
+                <input type="text" id="lastname" name="lastname" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="email">Email</label>
+            </td>
+            <td>
+                <input type="text" id="email" name="email" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="password">Password</label>
+            </td>
+            <td>
+                <input type="password" id="password" name="password" />
+            </td>
+        </tr>
+    </table>
+    <br />
+    <button id="sgnBtn">Sign up</button>
+</form>
+
+<div id="message" style="display:none">Successfully signed up!</div>
+</section>
+<% include partials/footer %>

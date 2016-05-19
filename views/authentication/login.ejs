@@ -1,0 +1,24 @@
+<% var js_includes = ['https://code.jquery.com/jquery-1.12.3.min.js', '/javascripts/login_ajax.js']%>
+
+<% include ../partials/header.ejs %>
+<section>
+    <h1 id="title">Login</h1>
+    <% if(typeof msg !== "undefined") { %>
+    <%= msg %>
+    <% } %>
+    <form id="uform">
+        <table>
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" id="email" /></td>
+            </tr><tr>
+                <td>Password:</td>
+                <td><input type="password" id="password" /></td>
+            </tr><tr><td>
+                <button id="logBtn">Log in</button>
+            </td></tr>
+        </table>
+    </form>
+    <div id="message" style="display:none">Logged in!</div>
+</section>
+<% include ../partials/footer.ejs %>

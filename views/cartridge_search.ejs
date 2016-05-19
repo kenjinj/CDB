@@ -1,0 +1,64 @@
+<% include partials/header %>
+<section>
+    <% var cases = [] %>
+    <% for( var i = 0; i < res.length; i++) { %>
+        <% if(i == 0) { %>
+            <% cases.push([res[i].case_id, res[i].case_name]) %>
+        <% } else if(res[i].case_id != res[i-1].case_id) { %>
+            <% cases.push([res[i].case_id, res[i].case_name]) %>
+        <% } %>
+    <% } %>
+    <% var bullets = [] %>
+    <% for( var i = 0; i < res.length; i++) { %>
+        <% if(i == 0) { %>
+            <% bullets.push([res[i].proj_id, res[i].weight, res[i].type]) %>
+        <% } else if(res[i].proj_id != res[i-1].proj_id) { %>
+            <% bullets.push([res[i].proj_id, res[i].weight, res[i].type]) %>
+        <% } %>
+    <% } %>
+    Search cartridge loads by search parameters:<br /><br />
+    <form method="POST" action="/cdb/searchResults">
+    <table>
+        <tr>
+            <td>
+                Case name:
+            </td>
+            <td>
+                Projectile:
+            </td>
+            <td>
+                Powder:
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select name="case_id_list" id="case_id_list">
+                    <option value="0" selected="selected">- Select -</option>
+                    <% for( var i = 0; i < cases.length; i++) { %>
+                        <option value="<%= cases[i][0] %>"><%= cases[i][1] %> </option>
+                    <% } %>
+                </select>
+            </td>
+            <td>
+                <select name="proj_id_list" id="proj_id_list">
+                    <option value="0" selected="selected">- Select -</option>
+                    <% for( var i = 0; i < bullets.length; i++) { %>
+                        <option value="<%= bullets[i][0] %>"><%= bullets[i][1] %> <%= bullets[i][2] %></option>
+                    <% } %>
+                </select>
+            </td>
+            <td>
+                <select name="powder_id_list" id="powder_id_list">
+                    <option value="0" selected="selected">- Select -</option>
+                    <% for( var i = 0; i < powders.length; i++) { %>
+                        <option value="<%= powders[i].powder_id %>"><%= powders[i].name %>%></option>
+                    <% } %>
+                </select>
+            </td>
+        </tr>
+    </table>
+        <br />
+        <button id="searchBtn">Search</button>
+    </form>
+</section>
+<% include partials/footer %>
