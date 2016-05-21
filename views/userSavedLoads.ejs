@@ -1,0 +1,33 @@
+
+<% include partials/header %>
+<section>
+    Your saved loads:<br /><br />
+    <% if(res != null) { %>
+    <table>
+        <tr>
+            <td>Case</td>
+            <td>Projectile</td>
+            <td>Powder</td>
+            <td>Grains</td>
+            <td>Velocity</td>
+        </tr>
+        <% for (var i=0; res.length > i; i++) { %>
+        <tr>
+            <form method="POST" action="/cdb/del_load">
+                <td><div style="display:none"><input type="text" id="load_id" name="load_id" value="<%= res[i].load_id %>" /></div><%= res[i].name %></td>
+                <td><%= res[i].proj_weight %> grns <%= res[i].proj_type %></td>
+                <td><%= res[i].manuf %> <%= res[i].powder %></td>
+                <td><%= res[i].powder_weight %></td>
+                <td><%= res[i].velocity %></td>
+                <td><button id="delBtn">Remove</button></td>
+            </form>
+        </tr>
+        <% } %>
+    </table>
+    <% } else { %>
+    No loads saved yet.<br />
+    <% } %>
+    <br />
+    <a href="/cdb/cartridgesAll">Search all</a>
+</section>
+<% include partials/footer %>

@@ -314,7 +314,7 @@ DROP PROCEDURE IF EXISTS cdb_CartridgeSearch;
 DELIMITER //
 CREATE PROCEDURE cdb_CartridgeSearch(_case_id int, _proj_id int, _powder_id int)
 BEGIN
-	select c.name, pro.weight as proj_weight, pro.type as proj_type, m.name as manuf, pow.name as powder, powder_weight, velocity from cdb_load l
+	select c.name, pro.weight as proj_weight, pro.type as proj_type, m.name as manuf, pow.name as powder, powder_weight, velocity, load_id from cdb_load l
 	join cdb_case c on l.case_id = c.case_id
     join cdb_projectile pro on l.proj_id = pro.proj_id
     join cdb_powder pow on l.powder_id = pow.powder_id
@@ -324,3 +324,23 @@ END //
 DELIMITER ;      
 
 CALL cdb_CartridgeSearch(1, 4 ,2);             
+
+DROP TABLE IF EXISTS cdb_userSavedLoads;
+CREATE TABLE cdb_userSavedLoads(user_id int, load_id int, primary key(user_id, load_id), foreign key(user_id) references cdb_users(user_id), foreign key(load_id) references cdb_load(load_id)); 
+SELECT * FROM cdb_userSavedLoads;
+
+DROP PROCEDURE IF EXISTS cdb_getUserSaved;
+DELIMITER //
+CREATE PROCEDURE cdb_getUserSaved(_user_id int)
+BEGIN
+	select c.name, pro.weight as proj_weight, pro.type as proj_type, m.name as manuf, pow.name as powder, powder_weight, velocity, u.load_id from cdb_userSavedLoads u
+    join cdb_load l on u.load_id = l.load_id
+	join cdb_case c on l.case_id = c.case_id
+    join cdb_projectile pro on l.proj_id = pro.proj_id
+    join cdb_powder pow on l.powder_id = pow.powder_id
+    join cdb_manufacturer m on pow.manuf_id = m.manuf_id 
+	where u.user_id = _user_id;
+END //
+DELIMITER ;  
+
+CALL cdb_getUserSaved(1);

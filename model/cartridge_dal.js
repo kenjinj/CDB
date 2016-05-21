@@ -45,3 +45,19 @@ exports.GetFromOptions = function(case_id, proj_id, powder_id, callback) {
         }
     });
 }
+
+exports.GetSavedLoads = function(account_info, callback) {
+    var query = "CALL cdb_getUserSaved(?)";
+    var query_data = [account_info.user_id];
+    connection.query(query, query_data, function(err, result) {
+        if(err){
+            callback(err, null);
+        }
+        else if(result[0].length > 0) {
+            callback(err, result[0]);
+        }
+        else {
+            callback(err, null);
+        }
+    });
+}

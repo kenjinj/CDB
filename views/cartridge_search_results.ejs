@@ -1,7 +1,9 @@
+
 <% include partials/header %>
 <section>
     <div>
         <% if(res != null) { %>
+
         <table>
             <tr>
                 <td>Case</td>
@@ -12,11 +14,14 @@
             </tr>
             <% for (var i=0; res.length > i; i++) { %>
             <tr>
-                <td><%= res[i].name %></td>
-                <td><%= res[i].proj_weight %> grns <%= res[i].proj_type %></td>
-                <td><%= res[i].manuf %> <%= res[i].powder %></td>
-                <td><%= res[i].powder_weight %></td>
-                <td><%= res[i].velocity %></td>
+                <form method="POST" action="/cdb/add_load">
+                    <td><div style="display:none"><input type="text" id="load_id" name="load_id" value="<%= res[i].load_id %>" /></div><%= res[i].name %></td>
+                    <td><%= res[i].proj_weight %> grns <%= res[i].proj_type %></td>
+                    <td><%= res[i].manuf %> <%= res[i].powder %></td>
+                    <td><%= res[i].powder_weight %></td>
+                    <td><%= res[i].velocity %></td>
+                    <td><button id="addBtn">Save</button></td>
+                </form>
             </tr>
             <% } %>
         </table>
